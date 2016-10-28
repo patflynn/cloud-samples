@@ -1,4 +1,5 @@
 FROM openjdk:8
+EXPOSE 8080
 VOLUME /tmp
 RUN mkdir -p /opt/cdbg
 RUN wget -qO- https://storage.googleapis.com/cloud-debugger/compute-java/debian-wheezy/cdbg_java_agent_gce.tar.gz | \
