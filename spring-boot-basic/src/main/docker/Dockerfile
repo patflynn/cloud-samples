@@ -1,0 +1,8 @@
+FROM openjdk:8
+VOLUME /tmp
+RUN mkdir -p /opt/cdbg
+RUN wget -qO- https://storage.googleapis.com/cloud-debugger/compute-java/debian-wheezy/cdbg_java_agent_gce.tar.gz | \
+    tar xvz -C /opt/cdbg
+ADD spring-boot-simple-0.1.0.jar app.jar
+RUN sh -c 'touch /app.jar'
+ENTRYPOINT ["java","-agentpath:/opt/cdbg/cdbg_java_agent.so","-Djava.security.egd=file:/dev/./urandom","-Dcom.google.cdbg.module=sprint-boot-simple","-Dcom.google.cdbg.version=1","-jar","/app.jar"]
