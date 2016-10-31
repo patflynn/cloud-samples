@@ -41,7 +41,7 @@
         <artifactId>docker-maven-plugin</artifactId>
         <version>0.4.11</version>
         <configuration>
-          <imageName>gcr.io/positive-karma-844/simple-spring:v4</imageName>
+          <imageName>gcr.io/positive-karma-844/simple-spring:v5</imageName>
           <dockerDirectory>src/main/docker</dockerDirectory>
           <resources>
             <resource>
