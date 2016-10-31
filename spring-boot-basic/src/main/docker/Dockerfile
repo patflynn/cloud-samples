@@ -6,4 +6,4 @@ RUN wget -qO- https://storage.googleapis.com/cloud-debugger/compute-java/debian-
     tar xvz -C /opt/cdbg
 ADD spring-boot-simple-0.1.0.jar app.jar
 RUN sh -c 'touch /app.jar'
-ENTRYPOINT ["java","-agentpath:/opt/cdbg/cdbg_java_agent.so=--logtostderr=1","-Djava.security.egd=file:/dev/./urandom","-Dcom.google.cdbg.module=sprint-boot-simple","-Dcom.google.cdbg.version=2","-jar","/app.jar"]
+ENTRYPOINT ["java","-agentpath:/opt/cdbg/cdbg_java_agent.so=--logtostderr=1","-Djava.security.egd=file:/dev/./urandom","-Dcom.google.cdbg.module=sprint-boot-simple","-Dcom.google.cdbg.version=v4","-jar","/app.jar"]
