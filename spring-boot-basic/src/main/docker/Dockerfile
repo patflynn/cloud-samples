@@ -8,4 +8,4 @@ ADD spring-boot-simple-0.1.0.jar app.jar
 ADD source-context.json source-context.json
 ADD source-contexts.json source-contexts.json
 RUN sh -c 'touch /app.jar'
-ENTRYPOINT ["java","-agentpath:/opt/cdbg/cdbg_java_agent.so=--logtostderr=1","-Djava.security.egd=file:/dev/./urandom","-Dcom.google.cdbg.module=sprint-boot-simple","-Dcom.google.cdbg.version=v4","-jar","/app.jar"]
+ENTRYPOINT ["java","-agentpath:/opt/cdbg/cdbg_java_agent.so=--logtostderr=1","-Djava.security.egd=file:/dev/./urandom","-Dcom.google.cdbg.module=sprint-boot-simple","-Dcom.google.cdbg.version=v5","-jar","/app.jar"]
