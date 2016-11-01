@@ -6,7 +6,7 @@
 
   <groupId>com.google</groupId>
   <artifactId>spring-boot-simple</artifactId>
-  <version>0.1.0</version>
+  <version>5.0</version>
   <packaging>jar</packaging>
 
   <parent>
@@ -25,6 +25,8 @@
   <properties>
     <java.version>1.8</java.version>
     <docker.image.prefix>gct</docker.image.prefix>
+    <gcp.project.id>positive-karma-844</gcp.project.id>
+    <service.name>simple-spring</service.name>
   </properties>
 
   <build>
@@ -37,22 +39,70 @@
         </configuration>
       </plugin>
       <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.7</version>
+        <configuration>
+          <encoding>UTF-8</encoding>
+        </configuration>
+        <executions>
+          <execution>
+            <id>filter-dockerfile</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/docker-ready</outputDirectory>
+              <useDefaultDelimiters>false</useDefaultDelimiters>
+              <delimiters>
+                <delimiter>${*}</delimiter>
+              </delimiters>
+              <resources>
+                <resource>
+                  <directory>${project.basedir}/src/main/docker</directory>
+                  <filtering>true</filtering>
+                  <includes>
+                    <include>Dockerfile</include>
+                  </includes>
+                </resource>
+                <!-- # Unfiltered Resources -->
+                <resource>
+                  <directory>${project.basedir}/src/main/docker</directory>
+                  <filtering>false</filtering>
+                  <excludes>
+                    <exclude>Dockerfile</exclude>
+                  </excludes>
+                </resource>
+              </resources>
+
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
         <groupId>com.spotify</groupId>
         <artifactId>docker-maven-plugin</artifactId>
         <version>0.4.11</version>
         <configuration>
-          <imageName>gcr.io/positive-karma-844/simple-spring:v5</imageName>
-          <dockerDirectory>src/main/docker</dockerDirectory>
+          <imageName>gcr.io/${gcp.project.id}/simple-spring:v${project.version}</imageName>
+          <dockerDirectory>${project.build.directory}/docker-ready</dockerDirectory>
           <resources>
             <resource>
               <targetPath>/</targetPath>
               <directory>${project.build.directory}</directory>
               <include>${project.build.finalName}.jar</include>
-              <include>source-context.json</include>
-              <include>source-contexts.json</include>
             </resource>
           </resources>
         </configuration>
+        <executions>
+          <execution>
+            <id>install-docker-image</id>
+            <phase>install</phase>
+            <goals>
+              <goal>build</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>com.google.cloud.tools</groupId>
@@ -60,15 +110,57 @@
         <version>1.0.1-SNAPSHOT</version>
         <executions>
           <execution>
-            <phase>package</phase>
+            <id>generate-source-context-files</id>
+            <phase>prepare-package</phase>
             <goals>
               <goal>genRepoInfoFile</goal>
             </goals>
           </execution>
         </executions>
-        <configuration>
-          <genRepoInfoFile.outputDirectory>${project.build.directory}</genRepoInfoFile.outputDirectory>
-        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <version>2.7</version>
+        <executions>
+          <execution>
+            <id>default-deploy</id>
+            <phase>none</phase>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>add-source-context</id>
+            <phase>package</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>jar</executable>
+              <commandlineArgs>
+                uf ${project.build.directory}/${project.build.finalName}.jar
+                -C ${project.build.directory}/classes source-context.json
+                -C ${project.build.directory}/classes source-contexts.json
+              </commandlineArgs>
+            </configuration>
+          </execution>
+          <execution>
+            <id>publish-to-gcr</id>
+            <phase>deploy</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>gcloud</executable>
+              <commandlineArgs>
+                docker push gcr.io/${gcp.project.id}/${service.name}:v${project.version}
+              </commandlineArgs>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>

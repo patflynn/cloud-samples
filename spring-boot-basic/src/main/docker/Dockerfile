@@ -4,8 +4,6 @@ VOLUME /tmp
 RUN mkdir -p /opt/cdbg
 RUN wget -qO- https://storage.googleapis.com/cloud-debugger/compute-java/debian-wheezy/cdbg_java_agent_gce.tar.gz | \
     tar xvz -C /opt/cdbg
-ADD spring-boot-simple-0.1.0.jar app.jar
-ADD source-context.json source-context.json
-ADD source-contexts.json source-contexts.json
+ADD ${project.build.finalName}.jar app.jar
 RUN sh -c 'touch /app.jar'
-ENTRYPOINT ["java","-agentpath:/opt/cdbg/cdbg_java_agent.so=--logtostderr=1","-Djava.security.egd=file:/dev/./urandom","-Dcom.google.cdbg.module=sprint-boot-simple","-Dcom.google.cdbg.version=v5","-jar","/app.jar"]
+ENTRYPOINT ["java","-agentpath:/opt/cdbg/cdbg_java_agent.so=--logtostderr=1","-Djava.security.egd=file:/dev/./urandom","-Dcom.google.cdbg.module=${service.name}","-Dcom.google.cdbg.version=${project.version}","-jar","/app.jar"]
