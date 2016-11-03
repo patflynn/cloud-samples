@@ -18,7 +18,7 @@ kubectl run simple-spring --image=gcr.io/positive-karma-844/simple-spring --port
 ## expose it to the world
 kubectl expose deployment simple-spring --type="LoadBalancer"
 ## checkout your public IP (may have to wait a few minutes)
-kubectl get service hello-node
+kubectl get service simple-spring
 
 ## run a local proxy to the kubectl API. Find it here:http://localhost:8081/ui
 kubectl proxy
