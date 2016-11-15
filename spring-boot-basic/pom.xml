@@ -108,6 +108,13 @@
         <groupId>com.google.cloud.tools</groupId>
         <artifactId>appengine-maven-plugin</artifactId>
         <version>1.0.1-SNAPSHOT</version>
+        <configuration>
+          <dockerfile>src/main/docker/Dockerfile-gae</dockerfile>
+          <appYamls>
+            <appYaml>src/main/appengine/app.yaml</appYaml>
+          </appYamls>
+          <deploy.project>paflynn-demo-project</deploy.project>
+        </configuration>
         <executions>
           <execution>
             <id>generate-source-context-files</id>
