@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>potpourri-ear</artifactId>
+    <version>1.0</version>
+    <packaging>ear</packaging>
+
+    <parent>
+        <groupId>com.google.cloud.tools.examples</groupId>
+        <artifactId>potpourri</artifactId>
+        <version>1.0</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.google.cloud.tools.examples.servers</groupId>
+            <artifactId>endpoints-frontend</artifactId>
+            <version>1.0</version>
+            <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>com.google.cloud.tools.examples.servers</groupId>
+            <artifactId>jdo-backend</artifactId>
+            <version>1.0</version>
+            <type>war</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ear-plugin</artifactId>
+                <version>2.8</version>
+                <configuration>
+                    <version>5</version>
+                    <defaultLibBundleDir>lib</defaultLibBundleDir>
+                    <unpackTypes>war</unpackTypes>
+                    <filtering>true</filtering>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.google.appengine</groupId>
+                <artifactId>appengine-maven-plugin</artifactId>
+                <version>${appengine.sdk.version}</version>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>
