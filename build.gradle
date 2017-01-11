@@ -9,6 +9,9 @@ buildscript {
 }
 
 subprojects {
+    repositories {
+        mavenCentral()
+    }
 
     apply plugin: 'java'
     sourceCompatibility = '1.7'
