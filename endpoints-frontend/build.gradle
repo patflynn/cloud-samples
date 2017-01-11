@@ -1,6 +1,10 @@
 apply plugin: 'war'
 apply plugin: 'appengine'
 
+war{
+    version = '1.0'
+}
+
 dependencies {
     compile 'javax.servlet:servlet-api:2.5'
     compile 'jstl:jstl:1.2'
