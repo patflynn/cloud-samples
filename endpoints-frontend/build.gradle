@@ -1,8 +1,10 @@
 apply plugin: 'war'
+apply plugin: 'appengine'
 
 dependencies {
     compile 'javax.servlet:servlet-api:2.5'
     compile 'jstl:jstl:1.2'
     compile 'com.googlecode.objectify:objectify:5.1.14'
     compile 'com.google.appengine:appengine-endpoints:1.9.48'
+    appengineSdk 'com.google.appengine:appengine-java-sdk:1.9.48'
 }

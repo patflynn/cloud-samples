@@ -1,19 +1,21 @@
-repositories { mavenCentral() }
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.google.appengine:gradle-appengine-plugin:1.9.48'
+    }
+}
 
 subprojects {
 
     apply plugin: 'java'
-    sourceCompatibility = java.version
-    targetCompatibility = java.version
+    sourceCompatibility = '1.7'
+    targetCompatibility = '1.7'
     tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
 
     dependencies {
-        appengineSdk 'com.google.appengine:appengine-java-sdk:1.9.48'
     }
 
-    apply plugin: 'appengine'
-
-    appengine {
-        downloadSdk = true
-    }
 }

@@ -1,6 +1,12 @@
 apply plugin: 'ear'
+apply plugin: 'appengine'
 
 dependencies {
+    appengineSdk 'com.google.appengine:appengine-java-sdk:1.9.48'
     deploy project(path: ':endpoints-frontend', configuration: 'archives')
-    deploy project(path: ':jdo-backend', confguration: 'archives')
+    deploy project(path: ':jdo-backend', configuration: 'archives')
+}
+
+appengine {
+    downloadSdk = true
 }
