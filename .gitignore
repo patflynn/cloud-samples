@@ -11,4 +11,6 @@ buildNumber.properties
 endpoints-frontend/target
 jdo-backend/target
 potpourri-ear/target
-.idea
+.idea/
+datanucleus.log
+jdo-backend/datanucleus.log
