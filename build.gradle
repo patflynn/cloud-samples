@@ -1,0 +1,19 @@
+repositories { mavenCentral() }
+
+subprojects {
+
+    apply plugin: 'java'
+    sourceCompatibility = java.version
+    targetCompatibility = java.version
+    tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
+
+    dependencies {
+        appengineSdk 'com.google.appengine:appengine-java-sdk:1.9.48'
+    }
+
+    apply plugin: 'appengine'
+
+    appengine {
+        downloadSdk = true
+    }
+}

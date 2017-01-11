@@ -1,0 +1,6 @@
+apply plugin: 'ear'
+
+dependencies {
+    deploy project(path: ':endpoints-frontend', configuration: 'archives')
+    deploy project(path: ':jdo-backend', confguration: 'archives')
+}
