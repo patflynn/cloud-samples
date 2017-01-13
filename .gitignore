@@ -1,4 +1,5 @@
 target/
+**/build/
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
@@ -15,3 +16,4 @@ potpourri-ear/target
 datanucleus.log
 jdo-backend/datanucleus.log
 .gradle
+build/
