@@ -3,7 +3,6 @@ apply plugin: 'appengine'
 
 war{
     version = '1.0'
-    expand appengineProjectName: appengineProject
 }
 
 dependencies {
