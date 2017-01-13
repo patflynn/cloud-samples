@@ -3,4 +3,5 @@
     <application>${appengineProjectName}</application>
     <threadsafe>true</threadsafe>
     <module>backend</module>
+    <version>1</version>
 </appengine-web-app>

@@ -3,7 +3,7 @@ apply plugin: 'appengine'
 
 war{
     version = '1.0'
-    expand appengineProjectName: 'paflynn-demo-project'
+    expand appengineProjectName: appengineProject
 }
 
 dependencies {
@@ -19,8 +19,8 @@ dependencies {
 appengine {
     downloadSdk = true
     enhancer {
-        version = "v2"
+        api = 'JDO'
+        version = 'v2'
         enhanceOnBuild = true
     }
-    version = 1
 }
