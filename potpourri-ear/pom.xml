@@ -38,6 +38,9 @@
                     <defaultLibBundleDir>lib</defaultLibBundleDir>
                     <unpackTypes>war</unpackTypes>
                     <filtering>true</filtering>
+                    <applicationXml>
+                        ${project.basedir}/src/main/application/META-INF/maven-application.xml
+                    </applicationXml>
                 </configuration>
             </plugin>
             <plugin>

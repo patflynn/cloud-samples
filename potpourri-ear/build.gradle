@@ -1,6 +1,10 @@
 apply plugin: 'ear'
 apply plugin: 'appengine'
 
+ear {
+    expand appengineProjectName: 'paflynn-demo-project'
+}
+
 dependencies {
     appengineSdk 'com.google.appengine:appengine-java-sdk:1.9.48'
     deploy project(path: ':endpoints-frontend', configuration: 'archives')
@@ -9,4 +13,5 @@ dependencies {
 
 appengine {
     downloadSdk = true
+    version = 1
 }

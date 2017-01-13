@@ -11,13 +11,13 @@
 
     <module>
         <web>
-            <web-uri>endpoints-frontend-1.0</web-uri>
+            <web-uri>endpoints-frontend-1.0.war</web-uri>
             <context-root>endpoints</context-root>
         </web>
     </module>
     <module>
         <web>
-            <web-uri>jdo-backend-1.0</web-uri>
+            <web-uri>jdo-backend-1.0.war</web-uri>
             <context-root>jdo</context-root>
         </web>
     </module>

@@ -1,8 +1,14 @@
 apply plugin: 'war'
 apply plugin: 'appengine'
 
-war{
+war {
     version = '1.0'
+    expand appengineProjectName: 'paflynn-demo-project'
+}
+
+appengine {
+    downloadSdk = true
+    version = 1
 }
 
 dependencies {
