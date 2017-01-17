@@ -5,21 +5,39 @@ war{
     version = '1.0'
 }
 
+configurations {
+    jdo {
+        extendsFrom compile
+    }
+}
+
 dependencies {
     compile 'javax.servlet:servlet-api:2.5'
     compile 'jstl:jstl:1.2'
     compile 'javax.jdo:jdo-api:3.0.1'
-//    compile 'org.datanucleus:datanucleus-core:3.1.4'
-    compile 'com.google.appengine.orm:datanucleus-appengine:2.1.2'
+    compile 'org.datanucleus:datanucleus-core:3.1.4'
     compile 'org.datanucleus:datanucleus-api-jdo:3.1.3'
+    compile 'com.google.appengine.orm:datanucleus-appengine:2.1.2'
+    jdo 'org.datanucleus:datanucleus-enhancer:3.1.1'
     appengineSdk 'com.google.appengine:appengine-java-sdk:1.9.48'
 }
 
+// Borrowed from https://issues.gradle.org/browse/GRADLE-1375
+task jdoEnhance << {
+    ant.taskdef(name: 'enhancer', classname: 'org.datanucleus.enhancer.tools.EnhancerTask', classpath: configurations.jdo.asPath)
+    ant.enhancer( dir: sourceSets.main.output.classesDir.canonicalPath.toURI().toString(), verbose: 'true') {
+        classpath {
+            pathelement(location: sourceSets.main.output.classesDir.canonicalPath.toURI().toString())
+            pathelement(path: configurations.jdo.asPath)
+        }
+        fileset(dir: sourceSets.main.output.classesDir.canonicalPath.toURI().toString()) {
+            include(name: '**/*.class')
+        }
+    }
+}
+
+classes.dependsOn jdoEnhance
+
 appengine {
     downloadSdk = true
-    enhancer {
-        api = 'JDO'
-        version = 'v2'
-        enhanceOnBuild = true
-    }
 }
