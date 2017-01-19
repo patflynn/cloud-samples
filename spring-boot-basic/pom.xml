@@ -38,9 +38,18 @@
       </snapshots>
     </repository>
   </repositories>
-
+  <pluginRepositories>
+    <pluginRepository>
+      <id>sonatype-nexus-snapshots</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
   <build>
     <plugins>
+
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
@@ -126,7 +135,6 @@
         <artifactId>appengine-maven-plugin</artifactId>
         <version>1.0.1-SNAPSHOT</version>
         <configuration>
-          <dockerfile>src/main/docker/Dockerfile-gae</dockerfile>
           <appYamls>
             <appYaml>src/main/appengine/app.yaml</appYaml>
           </appYamls>
