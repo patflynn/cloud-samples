@@ -1,6 +1,10 @@
 package com.google.cloud.tools.examples.servers.jdo;
 
-import javax.jdo.annotations.*;
+import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.IdentityType;
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
 
 /**
  *
@@ -14,6 +18,9 @@ public class Garbage {
 
     @Persistent
     private String contents;
+
+    @Persistent
+    private String consistentString = "WWWWWWOOOOOOHHHHAAAA";
 
     public Garbage(String contents) {
         this.contents = contents;
@@ -33,5 +40,13 @@ public class Garbage {
 
     public void setContents(String contents) {
         this.contents = contents;
+    }
+
+    public String getConsistentString() {
+        return consistentString;
+    }
+
+    public void setConsistentString(String consistentString) {
+        this.consistentString = consistentString;
     }
 }

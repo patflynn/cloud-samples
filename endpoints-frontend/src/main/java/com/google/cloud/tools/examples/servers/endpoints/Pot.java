@@ -12,6 +12,8 @@ public class Pot {
 
     private String framework;
 
+  private String fanciful = "fancyfeast";
+
     public Pot() {
     }
 
@@ -39,4 +41,12 @@ public class Pot {
     public void setFramework(String frameworks) {
         this.framework = frameworks;
     }
+
+  public String getFanciful() {
+    return fanciful;
+  }
+
+  public void setFanciful(String fanciful) {
+    this.fanciful = fanciful;
+  }
 }
