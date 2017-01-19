@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dispatch-entries>
+  <dispatch>
+    <!-- Default module serves simple hostname request. -->
+    <!-- I think this is the default so technically this is not necessary.-->
+    <url>simple-sample.appspot.com/</url>
+    <module>default</module>
+  </dispatch>
+  <dispatch>
+    <!-- Send all requests starting with /garbage/ to the backend service-->
+    <url>*/garbage/*</url>
+    <module>backend</module>
+  </dispatch>
+</dispatch-entries>
