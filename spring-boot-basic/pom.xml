@@ -139,6 +139,9 @@
             <goals>
               <goal>genRepoInfoFile</goal>
             </goals>
+            <configuration>
+              <genRepoInfoFile.ignoreErrors>true</genRepoInfoFile.ignoreErrors>
+            </configuration>
           </execution>
         </executions>
       </plugin>
