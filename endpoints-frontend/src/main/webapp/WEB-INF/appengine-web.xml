@@ -3,4 +3,7 @@
     <application>${appengineProjectName}</application>
     <threadsafe>true</threadsafe>
     <version>1</version>
+  <static-files>
+    <include path="/index.html"/>
+  </static-files>
 </appengine-web-app>
