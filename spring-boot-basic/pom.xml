@@ -138,7 +138,7 @@
           <appYamls>
             <appYaml>src/main/appengine/app.yaml</appYaml>
           </appYamls>
-          <deploy.project>paflynn-demo-project</deploy.project>
+          <deploy.project>${gcp.project.id}</deploy.project>
         </configuration>
         <executions>
           <execution>
