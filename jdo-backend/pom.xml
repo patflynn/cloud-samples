@@ -68,11 +68,13 @@
         </configuration>
       </plugin>
       <plugin>
-        <groupId>com.google.appengine</groupId>
+        <groupId>com.google.cloud.tools</groupId>
         <artifactId>appengine-maven-plugin</artifactId>
+        <version>1.0.0</version>
         <configuration>
-          <enableJarClasses>false</enableJarClasses>
-          <version>1</version>
+          <deploy.project>${appengineProjectName}</deploy.project>
+          <deploy.version>1</deploy.version>
+          <stage.enableJarClasses>false</stage.enableJarClasses>
         </configuration>
       </plugin>
       <plugin>
