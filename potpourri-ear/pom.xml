@@ -49,6 +49,11 @@
                 <version>${appengine.sdk.version}</version>
                 <configuration>
                     <version>1</version>
+                    <jvmFlags>
+                        <jvmFlag>
+                            -agentlib:jdwp=transport=dt_socket,address=5005,server=y,suspend=n
+                        </jvmFlag>
+                    </jvmFlags>
                 </configuration>
             </plugin>
         </plugins>
