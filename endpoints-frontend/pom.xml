@@ -70,12 +70,12 @@
                         </jvmFlag>
                     </devserver.jvmFlags>
                     <deploy.deployables>
-                        <deployable>${build.directory}/appengine-staging/app.yaml</deployable>
-                        <deployable>${build.directory}/appengine-staging/cron.yaml</deployable>
-                        <deployable>${build.directory}/appengine-staging/dispatch.yaml</deployable>
-                        <deployable>${build.directory}/appengine-staging/dos.yaml</deployable>
-                        <deployable>${build.directory}/appengine-staging/index.yaml</deployable>
-                        <deployable>${build.directory}/appengine-staging/queue.yaml</deployable>
+                        <deployable>${project.build.directory}/appengine-staging/app.yaml</deployable>
+                        <deployable>${project.build.directory}/appengine-staging/cron.yaml</deployable>
+                        <deployable>${project.build.directory}/appengine-staging/dispatch.yaml</deployable>
+                        <deployable>${project.build.directory}/appengine-staging/dos.yaml</deployable>
+                        <deployable>${project.build.directory}/appengine-staging/index.yaml</deployable>
+                        <deployable>${project.build.directory}/appengine-staging/queue.yaml</deployable>
                     </deploy.deployables>
                 </configuration>
             </plugin>
