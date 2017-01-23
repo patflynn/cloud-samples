@@ -9,7 +9,7 @@ buildscript {
 }
 
 apply plugin: 'war'
-apply plugin: 'appengine'
+apply plugin: 'com.google.cloud.tools.appengine'
 
 war {
     version = '1.0'
