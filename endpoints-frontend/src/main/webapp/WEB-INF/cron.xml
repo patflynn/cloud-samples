@@ -3,6 +3,6 @@
   <cron>
     <url>/garbage/addGarbage</url>
     <description>garbage creation</description>
-    <schedule>every 1 minutes</schedule>
+    <schedule>every 1 days</schedule>
   </cron>
 </cronentries>
