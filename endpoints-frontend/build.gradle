@@ -20,6 +20,14 @@ appengine {
     deploy {
         version = '1'
         project = appengineProject
+        deployables = [
+                file("${buildDir}/staged-app/app.yaml"),
+                file("${buildDir}/staged-app/cron.yaml"),
+                file("${buildDir}/staged-app/dispatch.yaml"),
+                file("${buildDir}/staged-app/dos.yaml"),
+                file("${buildDir}/staged-app/index.yaml"),
+                file("${buildDir}/staged-app/queue.yaml")
+        ]
     }
 }
 
