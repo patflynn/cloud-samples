@@ -1,5 +1,15 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.google.cloud.tools:appengine-gradle-plugin:1.0.0'
+    }
+}
+
 apply plugin: 'war'
-apply plugin: 'appengine'
+apply plugin: 'com.google.cloud.tools.appengine'
 
 war{
     version = '1.0'
@@ -19,7 +29,6 @@ dependencies {
     compile 'org.datanucleus:datanucleus-api-jdo:3.1.3'
     compile 'com.google.appengine.orm:datanucleus-appengine:2.1.2'
     jdo 'org.datanucleus:datanucleus-enhancer:3.1.1'
-    appengineSdk 'com.google.appengine:appengine-java-sdk:1.9.48'
 }
 
 // Borrowed from https://issues.gradle.org/browse/GRADLE-1375
@@ -39,5 +48,8 @@ task jdoEnhance << {
 classes.dependsOn jdoEnhance
 
 appengine {
-    downloadSdk = true
+    deploy {
+        version = '1'
+        project = appengineProject
+    }
 }
