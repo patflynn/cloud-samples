@@ -22,6 +22,7 @@ configurations {
 }
 
 dependencies {
+    compile 'com.google.appengine:appengine-api-1.0-sdk:1.9.48'
     compile 'javax.servlet:servlet-api:2.5'
     compile 'jstl:jstl:1.2'
     compile 'javax.jdo:jdo-api:3.0.1'
