@@ -8,3 +8,5 @@
 out/
 target/
 .mvn/
+cloud-debug-java
+
