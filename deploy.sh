@@ -32,5 +32,9 @@ kubectl edit deployment simple-spring
 ## to cleanup (don't waste the earth's computer resources!(and money))
 gcloud container clusters delete simple-spring
 
+## You also need to delete the load balancers!! they cost money too. (I used the UI)
+
 #note: how I debugged the cdb agent
 java -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005 -agentpath:/usr/local/google/home/paflynn/hack/kplay/cloud-debug-java/bin/cdbg_java_agent.so=--logtostderr=1 -Dcom.google.cdbg.module=sprint-boot-simple -Dcom.google.cdbg.version=v5 spring-boot-simple-0.1.0.jar -cp .
+#IJ VM options for test cdb agent
+-agentpath:/usr/local/google/home/paflynn/hack/kplay/cloud-debug-java/bin/cdbg_java_agent.so=--logtostderr=1

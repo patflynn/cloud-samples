@@ -1,2 +1,6 @@
 env: flex
 runtime: java
+manual_scaling:
+  max_num_instances: 1
+health_check:
+  enable_health_check: False
