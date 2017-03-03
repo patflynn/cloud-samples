@@ -147,7 +147,7 @@
           <deploy.project>${gcp.project.id}</deploy.project>
         </configuration>
         <executions>
-<!--          <execution>
+          <execution>
             <id>generate-source-context-files</id>
             <phase>prepare-package</phase>
             <goals>
@@ -156,7 +156,7 @@
             <configuration>
               <genRepoInfoFile.ignoreErrors>true</genRepoInfoFile.ignoreErrors>
             </configuration>
-          </execution>-->
+          </execution>
         </executions>
       </plugin>
       <plugin>
@@ -182,7 +182,7 @@
               <executable>$(gcloud beta emulators datastore env-init)</executable>
             </configuration>
           </execution>
-<!--          <execution>
+          <execution>
             <id>add-source-context</id>
             <phase>package</phase>
             <goals>
@@ -196,7 +196,7 @@
                 -C ${project.build.directory}/classes source-contexts.json
               </commandlineArgs>
             </configuration>
-          </execution>-->
+          </execution>
           <execution>
             <id>publish-to-gcr</id>
             <phase>deploy</phase>
