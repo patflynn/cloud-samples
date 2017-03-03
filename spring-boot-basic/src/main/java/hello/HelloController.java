@@ -34,7 +34,7 @@ public class HelloController {
     return "Greetings from Spring Boot!\n" + savedVisit.getString("message");
   }
 
-  @RequestMapping("/get")
+  @RequestMapping("/")
   public String index() {
     return "Hello World!";
   }
