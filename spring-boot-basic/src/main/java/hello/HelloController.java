@@ -4,6 +4,7 @@ import com.google.cloud.datastore.Datastore;
 import com.google.cloud.datastore.Entity;
 import com.google.cloud.datastore.Key;
 import org.springframework.web.bind.annotation.PathVariable;
+
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,6 +87,14 @@ public class HelloController {
     } while(!result.startsWith(HASH_PASS));
 
     return "Found a James Bond hash (" + HASH_PASS + ") : " + result;
+  }
+
+  @Autowired
+  private FibonacciService fibonacciService;
+
+  @RequestMapping("/fib")
+  public String fibonacci() {
+    return "Fibonacci : " + fibonacciService.fibonacci35();
   }
 
 }
