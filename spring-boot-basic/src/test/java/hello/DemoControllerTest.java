@@ -25,11 +25,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class DemoServiceTest {
+public class DemoControllerTest {
 
   private MockMvc mvc;
 
-  @InjectMocks private DemoService demoService;
+  @InjectMocks private DemoController demoController;
 
   @Mock private ShaService shaService;
 
@@ -39,21 +39,21 @@ public class DemoServiceTest {
   public void setUpMock() {
     MockitoAnnotations.initMocks(this);
 
-    mvc = MockMvcBuilders.standaloneSetup(demoService).build();
+    mvc = MockMvcBuilders.standaloneSetup(demoController).build();
   }
 
   @Test
   public void testSlow_success() throws Exception {
-    Mockito.when(shaService.getHashedTime()).thenReturn(DemoService.HASH_PASS + "junk");
+    Mockito.when(shaService.getHashedTime()).thenReturn(DemoController.HASH_PASS + "junk");
 
     mvc.perform(MockMvcRequestBuilders.get("/slow").accept(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
-        .andExpect(content().string(endsWith(DemoService.HASH_PASS + "junk")));
+        .andExpect(content().string(endsWith(DemoController.HASH_PASS + "junk")));
   }
 
   @Test
   public void testSlow_failure() throws Exception {
-    Mockito.when(shaService.getHashedTime()).thenReturn(DemoService.HASH_FAIL + "junk");
+    Mockito.when(shaService.getHashedTime()).thenReturn(DemoController.HASH_FAIL + "junk");
 
     try {
       mvc.perform(MockMvcRequestBuilders.get("/slow").accept(MediaType.APPLICATION_JSON));
