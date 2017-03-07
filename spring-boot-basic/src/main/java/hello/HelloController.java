@@ -1,27 +1,33 @@
 package hello;
 
 import com.google.cloud.datastore.Datastore;
-import com.google.cloud.datastore.DatastoreOptions;
 import com.google.cloud.datastore.Entity;
 import com.google.cloud.datastore.Key;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.logging.Logger;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.Clock;
-import java.util.logging.Logger;
 
 @RestController
 public class HelloController {
 
   private static final Logger logger = Logger.getLogger(HelloController.class.getName());
 
-  private static Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
+  @Autowired
+  private DatastoreService datastoreService;
 
   @RequestMapping("/visit")
   public String visit() {
+
+    Datastore datastore = datastoreService.getDatastore();
+
     String kind = "visit";
     long visitId = Clock.systemUTC().millis();
     Key visitKey = datastore.newKeyFactory().setKind(kind).newKey(visitId);
@@ -61,6 +67,34 @@ public class HelloController {
       }
     }
     return "Hi Mr or Mrs " + name + "!  You're using the browser " + displayName;
+  }
+
+  @Autowired
+  private ShaService shaService;
+
+  static final String HASH_PASS = "007";
+  static final String HASH_FAIL = "0007";
+
+  @RequestMapping("/slow")
+  public String slow() {
+    String result;
+    do {
+      result = shaService.getHashedTime();
+      // artificial error
+      if (result.startsWith(HASH_FAIL)) {
+        throw new IllegalStateException("Found an imposter hashed time (" + HASH_FAIL + ") : " + result);
+      }
+    } while(!result.startsWith(HASH_PASS));
+
+    return "Found a James Bond hash (" + HASH_PASS + ") : " + result;
+  }
+
+  @Autowired
+  private FibonacciService fibonacciService;
+
+  @RequestMapping("/fib")
+  public String fibonacci() {
+    return "Fibonacci : " + fibonacciService.fibonacci35();
   }
 
 }
