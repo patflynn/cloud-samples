@@ -1,9 +1,5 @@
 package hello;
 
-import static org.hamcrest.Matchers.endsWith;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Before;
@@ -22,6 +18,10 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.util.NestedServletException;
 
+import static org.hamcrest.Matchers.endsWith;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -29,14 +29,11 @@ public class HelloControllerTest {
 
   private MockMvc mvc;
 
-  @InjectMocks
-  private HelloController helloController;
+  @InjectMocks private HelloController helloController;
 
-  @Mock
-  private ShaService shaService;
+  @Mock private ShaService shaService;
 
-  @Mock
-  private DatastoreService datastoreService;
+  @Mock private DatastoreService datastoreService;
 
   @Before
   public void setUpMock() {
@@ -66,5 +63,4 @@ public class HelloControllerTest {
       Assert.assertThat(e.getCause(), Matchers.instanceOf(IllegalStateException.class));
     }
   }
-
 }

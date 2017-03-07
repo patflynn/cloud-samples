@@ -12,5 +12,4 @@ public class FibonacciServiceTest {
     BigInteger x = new FibonacciService().fibonacci35();
     Assert.assertEquals(x.toString(), "14930352");
   }
-
 }

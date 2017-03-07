@@ -24,5 +24,4 @@ public class ShaService {
     }
     return formatter.toString();
   }
-
 }

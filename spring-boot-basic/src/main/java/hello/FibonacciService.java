@@ -17,5 +17,4 @@ public class FibonacciService {
     }
     return fibonacci(n - 2).add(fibonacci(n - 1));
   }
-
 }

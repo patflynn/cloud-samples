@@ -3,25 +3,23 @@ package hello;
 import com.google.cloud.datastore.Datastore;
 import com.google.cloud.datastore.Entity;
 import com.google.cloud.datastore.Key;
-import org.springframework.web.bind.annotation.PathVariable;
-
-import java.util.logging.Logger;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.Clock;
+import java.util.logging.Logger;
 
 @RestController
 public class HelloController {
 
   private static final Logger logger = Logger.getLogger(HelloController.class.getName());
-
-  @Autowired
-  private DatastoreService datastoreService;
+  @Autowired private DatastoreService datastoreService;
+  @Autowired private ShaService shaService;
+  @Autowired private FibonacciService fibonacciService;
 
   @RequestMapping("/visit")
   public String visit() {
@@ -37,7 +35,7 @@ public class HelloController {
     logger.info(String.format("visit #%d saved", visitKey.getId()));
 
     Entity savedVisit = datastore.get(visitKey);
-    return "Greetings from Spring Boot!\n" + savedVisit.getString("message");
+    return savedVisit.getString("message");
   }
 
   @RequestMapping("/")
@@ -45,8 +43,7 @@ public class HelloController {
     return "Hello World!";
   }
 
-
-  @RequestMapping(value="/hello/{name}", method = RequestMethod.GET)
+  @RequestMapping(value = "/hello/{name}", method = RequestMethod.GET)
   public String hello(@PathVariable String name, HttpServletRequest request) {
     String userAgent = request.getHeader("User-Agent");
     String displayName = "Browser";
@@ -69,8 +66,6 @@ public class HelloController {
     return "Hi Mr or Mrs " + name + "!  You're using the browser " + displayName;
   }
 
-  @Autowired
-  private ShaService shaService;
 
   static final String HASH_PASS = "007";
   static final String HASH_FAIL = "0007";
@@ -82,19 +77,16 @@ public class HelloController {
       result = shaService.getHashedTime();
       // artificial error
       if (result.startsWith(HASH_FAIL)) {
-        throw new IllegalStateException("Found an imposter hashed time (" + HASH_FAIL + ") : " + result);
+        throw new IllegalStateException(
+                "Found an imposter hashed time (" + HASH_FAIL + ") : " + result);
       }
-    } while(!result.startsWith(HASH_PASS));
+    } while (!result.startsWith(HASH_PASS));
 
     return "Found a James Bond hash (" + HASH_PASS + ") : " + result;
   }
-
-  @Autowired
-  private FibonacciService fibonacciService;
 
   @RequestMapping("/fib")
   public String fibonacci() {
     return "Fibonacci : " + fibonacciService.fibonacci35();
   }
-
 }
