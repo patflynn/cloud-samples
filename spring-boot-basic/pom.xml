@@ -6,7 +6,7 @@
 
     <groupId>com.google</groupId>
     <artifactId>spring-boot-demo</artifactId>
-    <version>5.6</version>
+    <version>5.7</version>
     <packaging>jar</packaging>
 
     <parent>
