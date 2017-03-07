@@ -83,8 +83,8 @@ public class DemoController {
     return "Found a James Bond hash (" + HASH_PASS + ") : " + result;
   }
 
-  @RequestMapping("/fib")
-  public String fibonacci() {
-    return "Fibonacci : " + fibonacciService.fibonacci35();
+  @RequestMapping("/fib/{n}")
+  public String fibonacci(@PathVariable("n") int n) {
+    return "Fibonacci : " + fibonacciService.fibonacci(n);
   }
 }
