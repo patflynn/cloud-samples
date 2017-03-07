@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.google</groupId>
-    <artifactId>spring-boot-simple</artifactId>
+    <artifactId>spring-boot-demo</artifactId>
     <version>5.2</version>
     <packaging>jar</packaging>
 
