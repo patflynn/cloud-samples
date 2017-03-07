@@ -6,7 +6,7 @@
 
     <groupId>com.google</groupId>
     <artifactId>spring-boot-demo</artifactId>
-    <version>5.2</version>
+    <version>5.4</version>
     <packaging>jar</packaging>
 
     <parent>
@@ -128,7 +128,7 @@
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>0.4.11</version>
                 <configuration>
-                    <imageName>gcr.io/${gcp.project.id}/simple-spring:v${project.version}</imageName>
+                    <imageName>gcr.io/${gcp.project.id}/${service.name}:v${project.version}</imageName>
                     <dockerDirectory>${project.build.directory}/docker-ready</dockerDirectory>
                     <resources>
                         <resource>
@@ -218,7 +218,7 @@
                         <configuration>
                             <executable>gcloud</executable>
                             <commandlineArgs>
-                                docker push gcr.io/${gcp.project.id}/${service.name}:v${project.version}
+                                docker -- push gcr.io/${gcp.project.id}/${service.name}:v${project.version}
                             </commandlineArgs>
                         </configuration>
                     </execution>

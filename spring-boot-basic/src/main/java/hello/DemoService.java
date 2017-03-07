@@ -32,8 +32,6 @@ public class DemoService {
     String message = String.format("Visit #%d occurred", visitId);
     Entity visit = Entity.newBuilder(visitKey).set("message", message).build();
     datastore.put(visit);
-    logger.info(String.format("visit #%d saved", visitKey.getId()));
-
     Entity savedVisit = datastore.get(visitKey);
     return savedVisit.getString("message");
   }
