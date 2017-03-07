@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -19,6 +20,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.util.NestedServletException;
 
 import static org.hamcrest.Matchers.endsWith;
+import static org.hamcrest.Matchers.equalTo;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -29,6 +31,7 @@ public class DemoControllerTest {
 
   private MockMvc mvc;
 
+  @Autowired
   @InjectMocks private DemoController demoController;
 
   @Mock private ShaService shaService;
@@ -62,5 +65,21 @@ public class DemoControllerTest {
       Assert.assertThat(e, Matchers.instanceOf(NestedServletException.class));
       Assert.assertThat(e.getCause(), Matchers.instanceOf(IllegalStateException.class));
     }
+  }
+
+  @Test
+  public void testFib_withoutParam() throws Exception {
+
+    mvc.perform(MockMvcRequestBuilders.get("/fib").accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().is(404));
+
+  }
+
+  @Test
+  public void testFib_withParam() throws Exception {
+
+    mvc.perform(MockMvcRequestBuilders.get("/fib/35").accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andExpect(content().string(equalTo("Fibonacci : 14930352")));
   }
 }

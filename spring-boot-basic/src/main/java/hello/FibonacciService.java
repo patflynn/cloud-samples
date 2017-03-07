@@ -7,11 +7,7 @@ import java.math.BigInteger;
 @Component
 public class FibonacciService {
 
-  public BigInteger fibonacci35() {
-    return fibonacci(35);
-  }
-
-  private BigInteger fibonacci(int n) {
+  public BigInteger fibonacci(int n) {
     if (n == 0 || n == 1) {
       return BigInteger.ONE;
     }
