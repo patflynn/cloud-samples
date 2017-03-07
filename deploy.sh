@@ -9,12 +9,12 @@ mvn deploy
 ## create the cluster if you haven't already
 gcloud container clusters create demo-app --scopes=https://www.googleapis.com/auth/cloud_debugger,https://www.googleapis.com/auth/datastore
 ## initialize your kubectl creds/context
-gcloud container clusters get-credentials simple-spring
+gcloud container clusters get-credentials demo-app
 ## you'll probably have to do this for dumb reasons
 gcloud auth application-default login
 
 ## start the app
-kubectl run demo-app --image=gcr.io/positive-karma-844/simple-spring --port=8080
+kubectl run demo-app --image=gcr.io/gcp-next-java/simple-spring:{version} --port=8080
 ## expose it to the world
 kubectl expose deployment demo-app --type="LoadBalancer"
 ## checkout your public IP (may have to wait a few minutes)

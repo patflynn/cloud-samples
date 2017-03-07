@@ -18,7 +18,7 @@
     <properties>
         <java.version>1.8</java.version>
         <docker.image.prefix>gct</docker.image.prefix>
-        <gcp.project.id>positive-karma-844</gcp.project.id>
+        <gcp.project.id>gcp-next-java</gcp.project.id>
         <service.name>simple-spring</service.name>
     </properties>
 

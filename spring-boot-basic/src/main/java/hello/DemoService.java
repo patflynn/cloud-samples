@@ -14,9 +14,9 @@ import java.time.Clock;
 import java.util.logging.Logger;
 
 @RestController
-public class HelloController {
+public class DemoService {
 
-  private static final Logger logger = Logger.getLogger(HelloController.class.getName());
+  private static final Logger logger = Logger.getLogger(DemoService.class.getName());
   @Autowired private DatastoreService datastoreService;
   @Autowired private ShaService shaService;
   @Autowired private FibonacciService fibonacciService;
