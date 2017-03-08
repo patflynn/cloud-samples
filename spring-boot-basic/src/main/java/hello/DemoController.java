@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 public class DemoController {
 
   private static final Logger logger = Logger.getLogger(DemoController.class.getName());
+
   @Autowired private DatastoreService datastoreService;
   @Autowired private ShaService shaService;
   @Autowired private FibonacciService fibonacciService;
