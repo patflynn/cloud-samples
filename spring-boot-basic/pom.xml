@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.google</groupId>
-    <artifactId>spring-boot-demo</artifactId>
+    <artifactId>demo-app</artifactId>
     <version>5.8</version>
     <packaging>jar</packaging>
 
@@ -158,7 +158,7 @@
                     </appYamls>
                     <deploy.project>${gcp.project.id}</deploy.project>
                 </configuration>
-                <executions>
+              <!--  <executions>
                     <execution>
                         <id>generate-source-context-files</id>
                         <phase>prepare-package</phase>
@@ -169,7 +169,7 @@
                             <genRepoInfoFile.ignoreErrors>true</genRepoInfoFile.ignoreErrors>
                         </configuration>
                     </execution>
-                </executions>
+                </executions>-->
             </plugin>
             <plugin>
                 <artifactId>maven-deploy-plugin</artifactId>
@@ -194,7 +194,7 @@
                             <executable>$(gcloud beta emulators datastore env-init)</executable>
                         </configuration>
                     </execution>
-                    <execution>
+                    <!--<execution>
                         <id>add-source-context</id>
                         <phase>package</phase>
                         <goals>
@@ -208,7 +208,7 @@
                                 -C ${project.build.directory}/classes source-contexts.json
                             </commandlineArgs>
                         </configuration>
-                    </execution>
+                    </execution>-->
                     <execution>
                         <id>publish-to-gcr</id>
                         <phase>deploy</phase>
