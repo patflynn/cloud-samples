@@ -6,4 +6,12 @@ RUN wget -qO- https://storage.googleapis.com/cloud-debugger/compute-java/debian-
     tar xvz -C /opt/cdbg
 ADD ${project.build.finalName}.jar app.jar
 RUN sh -c 'touch /app.jar'
-ENTRYPOINT ["java","-agentpath:/opt/cdbg/cdbg_java_agent.so=--logtostderr=1","-Djava.security.egd=file:/dev/./urandom","-Dcom.google.cdbg.module=${service.name}","-Dcom.google.cdbg.version=${project.version}","-jar","/app.jar"]
+ENTRYPOINT [
+    "java",
+    "-agentpath:/opt/cdbg/cdbg_java_agent.so=--logtostderr=1",
+    "-Djava.security.egd=file:/dev/./urandom",
+    "-Dcom.google.cdbg.module=${service.name}",
+    "-Dcom.google.cdbg.version=${project.version}",
+    "-jar",
+    "/app.jar"
+]
