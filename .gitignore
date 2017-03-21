@@ -9,4 +9,4 @@ out/
 target/
 .mvn/
 cloud-debug-java
-
+.DS_Store
