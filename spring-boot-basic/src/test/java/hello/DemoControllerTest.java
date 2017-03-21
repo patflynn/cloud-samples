@@ -80,6 +80,6 @@ public class DemoControllerTest {
 
     mvc.perform(MockMvcRequestBuilders.get("/fib/35").accept(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
-        .andExpect(content().string(equalTo("Fibonacci : 14930352")));
+        .andExpect(content().string(equalTo("Fibonacci : 9227465")));
   }
 }
