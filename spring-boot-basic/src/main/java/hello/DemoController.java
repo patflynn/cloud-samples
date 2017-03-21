@@ -30,7 +30,7 @@ public class DemoController {
     String kind = "visit";
     long visitId = Clock.systemUTC().millis();
     Key visitKey = datastore.newKeyFactory().setKind(kind).newKey(visitId);
-    String message = String.format("Visit #%d occurred", visitId);
+    String message = String.format("Welcome to Java Tools demo! Your visit number %d has been recorded", visitId);
     Entity visit = Entity.newBuilder(visitKey).set("message", message).build();
     datastore.put(visit);
     Entity savedVisit = datastore.get(visitKey);
@@ -39,7 +39,7 @@ public class DemoController {
 
   @RequestMapping("/")
   public String index() {
-    return "Hello World! v 5.8";
+    return "Hello World! v 5.9";
   }
 
   @RequestMapping(value = "/hello/{name}", method = RequestMethod.GET)
