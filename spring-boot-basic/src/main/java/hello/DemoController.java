@@ -3,6 +3,8 @@ package hello;
 import com.google.cloud.datastore.Datastore;
 import com.google.cloud.datastore.Entity;
 import com.google.cloud.datastore.Key;
+import com.google.cloud.translate.Translate;
+import com.google.cloud.translate.TranslateOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +24,8 @@ public class DemoController {
   @Autowired private ShaService shaService;
   @Autowired private FibonacciService fibonacciService;
 
-  @RequestMapping("/visit")
-  public String visit() {
+  @RequestMapping("/visit/{greeting}")
+  public String visit(@PathVariable String greeting) {
 
     Datastore datastore = datastoreService.getDatastore();
 
@@ -34,7 +36,10 @@ public class DemoController {
     Entity visit = Entity.newBuilder(visitKey).set("message", message).build();
     datastore.put(visit);
     Entity savedVisit = datastore.get(visitKey);
-    return savedVisit.getString("message");
+    Translate translate = TranslateOptions.getDefaultInstance().getService();
+
+    return translate.translate(savedVisit.getString("message"), Translate.TranslateOption.sourceLanguage("en"),
+            Translate.TranslateOption.targetLanguage(translate.detect(greeting).getLanguage())).getTranslatedText();
   }
 
   @RequestMapping("/")
