@@ -162,7 +162,7 @@
                     </appYamls>
                     <deploy.project>${gcp.project.id}</deploy.project>
                 </configuration>
-              <!--  <executions>
+                <executions>
                     <execution>
                         <id>generate-source-context-files</id>
                         <phase>prepare-package</phase>
@@ -173,7 +173,7 @@
                             <genRepoInfoFile.ignoreErrors>true</genRepoInfoFile.ignoreErrors>
                         </configuration>
                     </execution>
-                </executions>-->
+                </executions>
             </plugin>
             <plugin>
                 <artifactId>maven-deploy-plugin</artifactId>
@@ -190,15 +190,6 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>export gcloud emulators environment variables</id>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <configuration>
-                            <executable>$(gcloud beta emulators datastore env-init)</executable>
-                        </configuration>
-                    </execution>
-                    <!--<execution>
                         <id>add-source-context</id>
                         <phase>package</phase>
                         <goals>
@@ -212,7 +203,7 @@
                                 -C ${project.build.directory}/classes source-contexts.json
                             </commandlineArgs>
                         </configuration>
-                    </execution>-->
+                    </execution>
                     <execution>
                         <id>publish-to-gcr</id>
                         <phase>deploy</phase>
