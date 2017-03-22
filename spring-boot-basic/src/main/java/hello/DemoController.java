@@ -44,7 +44,7 @@ public class DemoController {
 
   @RequestMapping("/")
   public String index() {
-    return "Hello World! v 5.9";
+    return "Hello World! v 6.0";
   }
 
   @RequestMapping(value = "/hello/{name}", method = RequestMethod.GET)
