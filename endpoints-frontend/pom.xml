@@ -61,6 +61,12 @@
                 <artifactId>appengine-maven-plugin</artifactId>
                 <version>1.0.0</version>
                 <configuration>
+                    <appYamls>
+                        <appYaml>${project.build.directory}/appengine-staging/app.yaml</appYaml>
+                        <appYaml>
+                            ${project.parent.basedir}/jdo-backend/target/appengine-staging/app.yaml
+                        </appYaml>
+                    </appYamls>
                     <deploy.project>${appengineProjectName}</deploy.project>
                     <stage.enableJarClasses>false</stage.enableJarClasses>
                     <deploy.version>1</deploy.version>
