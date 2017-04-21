@@ -59,30 +59,11 @@
             <plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>appengine-maven-plugin</artifactId>
-                <version>1.0.0</version>
+                <version>1.3.0</version>
                 <configuration>
-                    <appYamls>
-                        <appYaml>${project.build.directory}/appengine-staging/app.yaml</appYaml>
-                        <appYaml>
-                            ${project.parent.basedir}/jdo-backend/target/appengine-staging/app.yaml
-                        </appYaml>
-                    </appYamls>
                     <deploy.project>${appengineProjectName}</deploy.project>
                     <stage.enableJarClasses>false</stage.enableJarClasses>
                     <deploy.version>1</deploy.version>
-                    <devserver.jvmFlags>
-                        <jvmFlag>
-                            -agentlib:jdwp=transport=dt_socket,address=5005,server=y,suspend=n
-                        </jvmFlag>
-                    </devserver.jvmFlags>
-                    <deploy.deployables>
-                        <deployable>${project.build.directory}/appengine-staging/app.yaml</deployable>
-                        <deployable>${project.build.directory}/appengine-staging/cron.yaml</deployable>
-                        <deployable>${project.build.directory}/appengine-staging/dispatch.yaml</deployable>
-                        <deployable>${project.build.directory}/appengine-staging/dos.yaml</deployable>
-                        <deployable>${project.build.directory}/appengine-staging/index.yaml</deployable>
-                        <deployable>${project.build.directory}/appengine-staging/queue.yaml</deployable>
-                    </deploy.deployables>
                 </configuration>
             </plugin>
         </plugins>
