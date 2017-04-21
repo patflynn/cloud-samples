@@ -64,6 +64,13 @@
                     <deploy.project>${appengineProjectName}</deploy.project>
                     <stage.enableJarClasses>false</stage.enableJarClasses>
                     <deploy.version>1</deploy.version>
+                    <services>
+                        <service>${project.build.directory}/${project.name}-${project.version}
+                        </service>
+                        <service>
+                            ${project.parent.basedir}/jdo-backend/target/jdo-backend-${project.version}
+                        </service>
+                    </services>
                 </configuration>
             </plugin>
         </plugins>
