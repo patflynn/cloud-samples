@@ -4,7 +4,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.google.cloud.tools:appengine-gradle-plugin:1.0.0'
+        classpath 'com.google.cloud.tools:appengine-gradle-plugin:1.3.0'
     }
 }
 
@@ -20,14 +20,6 @@ appengine {
     deploy {
         version = '1'
         project = appengineProject
-        deployables = [
-                file("${buildDir}/staged-app/app.yaml"),
-                file("${buildDir}/staged-app/cron.yaml"),
-                file("${buildDir}/staged-app/dispatch.yaml"),
-                file("${buildDir}/staged-app/dos.yaml"),
-                file("${buildDir}/staged-app/index.yaml"),
-                file("${buildDir}/staged-app/queue.yaml")
-        ]
     }
 }
 
