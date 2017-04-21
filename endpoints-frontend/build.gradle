@@ -21,6 +21,13 @@ appengine {
         version = '1'
         project = appengineProject
     }
+
+    run {
+        services = [
+                getExplodedAppDir(project),
+                getExplodedAppDir(project(":jdo-backend"))
+        ]
+    }
 }
 
 dependencies {
@@ -28,4 +35,16 @@ dependencies {
     compile 'jstl:jstl:1.2'
     compile 'com.googlecode.objectify:objectify:5.1.14'
     compile 'com.google.endpoints:endpoints-framework:2.0.0'
+}
+
+// helper method to obtain correct directory and set up dependencies
+def getExplodedAppDir(Project p) {
+    // if not 'this' module, then do some setup.
+    if (p != project) {
+        // make sure we evaluate other modules first so we get the right value
+        evaluationDependsOn(p.path)
+        // make sure we build "run" depends on the other modules exploding wars
+        project.tasks.appengineRun.dependsOn p.tasks.explodeWar
+    }
+    return p.tasks.explodeWar.explodedAppDirectory
 }

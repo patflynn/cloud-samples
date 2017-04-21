@@ -1,3 +1,2 @@
 include 'endpoints-frontend'
 include 'jdo-backend'
-include 'potpourri-ear'
