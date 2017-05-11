@@ -32,16 +32,33 @@ dependencies {
     jdo 'org.datanucleus:datanucleus-enhancer:3.1.1'
 }
 
-// Borrowed from https://issues.gradle.org/browse/GRADLE-1375
-task jdoEnhance << {
-    ant.taskdef(name: 'enhancer', classname: 'org.datanucleus.enhancer.tools.EnhancerTask', classpath: configurations.jdo.asPath)
-    ant.enhancer( dir: sourceSets.main.output.classesDir.canonicalPath.toURI().toString(), verbose: 'true') {
-        classpath {
-            pathelement(location: sourceSets.main.output.classesDir.canonicalPath.toURI().toString())
-            pathelement(path: configurations.jdo.asPath)
+task jdoEnhance {
+    description "Enhance JPA model classes using DataNucleus Enhancer"
+
+    doLast {
+        // define the entity classes
+        def entityFiles = fileTree(sourceSets.main.output.classesDir).matching {
+            include 'com/google/**/*.class'
         }
-        fileset(dir: sourceSets.main.output.classesDir.canonicalPath.toURI().toString()) {
-            include(name: '**/*.class')
+
+        println "Enhancing with DataNucleus the following files"
+        entityFiles.getFiles().each {
+            println it
+        }
+
+        // define Ant task for DataNucleus Enhancer
+        ant.taskdef(
+                name : 'enhancer',
+                classpath : configurations.jdo.asPath,
+                classname : 'org.datanucleus.enhancer.tools.EnhancerTask'
+        )
+
+        // run the DataNucleus Enhancer as an Ant task
+        ant.enhancer(
+                classpath: sourceSets.main.runtimeClasspath.asPath,
+                verbose: true,
+                api: "JDO") {
+            entityFiles.addToAntBuilder(ant, 'fileset', FileCollection.AntType.FileSet)
         }
     }
 }
