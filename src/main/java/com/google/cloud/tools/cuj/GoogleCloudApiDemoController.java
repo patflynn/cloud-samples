@@ -1,5 +1,10 @@
 package com.google.cloud.tools.cuj;
 
+import com.google.cloud.translate.Detection;
+import com.google.cloud.translate.Translate;
+import com.google.cloud.translate.Translate.TranslateOption;
+import com.google.cloud.translate.TranslateOptions;
+import com.google.cloud.translate.Translation;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,9 +21,20 @@ public class GoogleCloudApiDemoController {
     return "index";
   }
 
+
   @PostMapping("/translate")
   public String translate(Model model, String sourceText) {
-    model.addAttribute(new TranslationResponse("Wagadoogoo", "You what!?"));
+    Translate translate = TranslateOptions.getDefaultInstance().getService();
+
+    Detection detectedSourceLanguage = translate.detect(sourceText);
+    Translation translation =
+        translate.translate(
+            sourceText,
+            TranslateOption.sourceLanguage(detectedSourceLanguage.getLanguage()),
+            TranslateOption.targetLanguage("fa"));
+    model.addAttribute(
+        new TranslationResponse(detectedSourceLanguage.getLanguage(),
+            translation.getTranslatedText()));
     return "index";
   }
 }
