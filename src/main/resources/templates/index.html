@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Use all the power of Google Cloud Java APIs</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<ul>
+  <li>
+    <h1>
+      Translate the message of your choice to English:
+    </h1>
+    <form action="#" th:action="@{/translate}"  method="post">
+      <p>Text to translate: <input type="text" name="sourceText"/></p>
+      <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+    </form>
+    <p th:text="${translationResponse?.sourceLanguage}">The detected source language will appear here.</p>
+    <p th:text="${translationResponse?.translatedText}">The Engligh translation will appear here.</p>
+  </li>
+</ul>
+</body>
+</html>
