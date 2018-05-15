@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-skaffold-web
+  labels:
+    app: spring-skaffold-web
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+      name: spring-skaffold-web
+  selector:
+    app: spring-skaffold-web
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-skaffold-web
+  labels:
+    app: spring-skaffold-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-skaffold-web
+  template:
+    metadata:
+      labels:
+        app: spring-skaffold-web
+    spec:
+      containers:
+      - name: spring-skaffold-web
+        image: gcr.io/paflynn-demo-project/springboot-skaffold
+        ports:
+        - containerPort: 8080

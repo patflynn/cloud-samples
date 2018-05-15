@@ -1,0 +1,14 @@
+apiVersion: skaffold/v1alpha2
+kind: Config
+build:
+  artifacts:
+  - imageName: gcr.io/paflynn-demo-project/springboot-skaffold
+    workspace: target/.
+    docker:
+      dockerfilePath: docker-ready/Dockerfile
+  local: {}
+deploy:
+  kubectl:
+    manifests:
+    - ./src/main/kubernetes/*
+    
