@@ -1,0 +1,4 @@
+env: flex
+runtime: java
+health_check:
+  enable_health_check: False
