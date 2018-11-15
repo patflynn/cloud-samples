@@ -1,0 +1,6 @@
+apiVersion: skaffold/v1alpha4
+kind: Config
+build:
+  artifacts:
+  - image: gcr.io/positive-karma-844/hello-spring
+    jibMaven: {}
