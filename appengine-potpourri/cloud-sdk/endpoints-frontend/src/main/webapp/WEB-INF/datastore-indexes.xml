@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datastore-indexes
+  autoGenerate="true">
+  <datastore-index ancestor="false" kind="Pot">
+    <property direction="asc" name="framework" />
+    <property direction="asc" name="fanciful" />
+  </datastore-index>
+  <datastore-index ancestor="false" kind="Garbage">
+    <property direction="asc" name="contents" />
+    <property direction="asc" name="consistentString" />
+  </datastore-index>
+</datastore-indexes>
